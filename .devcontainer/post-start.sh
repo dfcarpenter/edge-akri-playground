@@ -1,5 +1,5 @@
 
-export AKRI_HELM_CRICTL_CONFIGURATION="--set kubernetesDistro=k8s"
+export AKRI_HELM_CRICTL_CONFIGURATION="--set kubernetesDistro=k3s"
 
 echo "post-start start"
 echo "$(date +'%Y-%m-%d %H:%M:%S')    post-start start" >> "$HOME/status"
@@ -40,7 +40,7 @@ echo "E4k install complete"
 
 # Installing from the AKRI chart that was copied to our repo.
 # helm install akri .\distrib\kubernetes\akri\10_akri\helm\ -n akri -f .\distrib\kubernetes\akri\10_akri\values.yaml
-echo "Akri install complete"
+
 
 
 echo "installing E4K cli start"

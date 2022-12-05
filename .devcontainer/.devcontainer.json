@@ -38,14 +38,11 @@
 
 	// Install extensions
 	"extensions": [
-		"ms-dotnettools.csharp",
 		"ms-azuretools.vscode-docker",
 		"ms-kubernetes-tools.vscode-kubernetes-tools",
 		"davidanson.vscode-markdownlint",
 		"mutantdino.resourcemonitor",
-		"humao.rest-client",
-		"timonwong.shellcheck",
-		"MS-vsliveshare.vsliveshare-pack"
+		"timonwong.shellcheck"
 	],
 
 	"waitFor": "postCreateCommand",
