@@ -64,9 +64,6 @@
 	"postStartCommand": "bash ./.devcontainer/post-start.sh",
 
 	"forwardPorts": [
-		"8081:8081",
-		30000,
-		31080,
-		32000
-	],
+		"8081:8081"
+	]
 }
