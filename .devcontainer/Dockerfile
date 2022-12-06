@@ -39,8 +39,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
 RUN wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 
 # Setup Yq
-RUN wget https://github.com/mikefarah/yq/releases/download/v4.2.0/yq_linux_amd64.tar.gz -O - |\
-  tar xz && mv ${BINARY} /usr/bin/yq
+
 
 # Setup k9s
 RUN curl -LO https://github.com/derailed/k9s/releases/download/v${K9S_VER}/k9s_Linux_x86_64.tar.gz && \
