@@ -1,5 +1,5 @@
 {
-	"name": "k8sedge-samples",
+	"name": "edge-akri-playground",
 	"dockerFile": "Dockerfile",
 
 	// do not change these if you want Docker in Docker support
