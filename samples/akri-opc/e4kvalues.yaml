@@ -1,0 +1,57 @@
+e4kdmqtt:
+  broker:
+    frontend:
+      replicas: 2
+    backend:
+      replicas: 2 
+      chainCount: 2
+  
+  authenticationMethods:
+    - method: sat
+      # All SATs must have one of the audiences below.
+      audiences: ["azedge-dmqtt"]
+    - method: username-password 
+      password_database: clients
+    - method: svid
+      agent_socket_path: "/run/azedge/sockets/workloadapi.sock"
+      identity_max_retry: 3
+      identity_wait_retry_ms: 5000
+
+connector:
+  enabled: true
+
+e4kconnector:
+  kafka:
+    # Port 9093 is Event Hub's Kakfa endpoint
+    endpoint: akri-opc-ehnamespace.servicebus.windows.net:9093
+    # Kafka consumer group id prefix
+    # Unique for every route that sinks from Kafka to E4K
+    group_id_prefix: e4kconnector
+    # Interval to commit consumer reading offset position to Kafka broker
+    auto_commit_interval_ms: 5000
+    listener:
+      # Event Hub uses SSL
+      type: ssl
+      # Event Hub uses SASL PLAIN authentication for its Kafka-compatible endpoint
+      sasl:
+        sasl_type: plain
+        username: $ConnectionString
+        password: Endpoint=sb://akri-opc-ehnamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=4qMdjcW8C01ZOuFl8wEcLSzz5WMGkNMIjhyv1KHt4M4=
+  topicMap:
+    configYaml:
+      route:
+        # Pull from MQTT topic "umati-telemetry" and push to Kafka topic "telemetry"
+        # Default partition 0 only
+        - kafka: e4k-d2c
+          mqtt: /sample-application/data/opc-connector/opc-ua-connector/thermostat-sample
+          sink_to: kafka
+        - kafka: e4k-d2c
+          mqtt: /sample-application/data/opc-connector/opc-ua-connector/robot-sample
+          sink_to: kafka
+        - kafka: e4k-d2c
+          mqtt: /sample-application/data/opc-connector/opc-ua-connector/boiler-sample
+          sink_to: kafka
+        - kafka: e4k-d2c
+          mqtt: /opc-tcp-umati-akri-svc-cluster-local-4840/data/opc-connector/publisher/nsu-http-vdma-org-opcroboticstestserver-i-5015asset
+          sink_to: kafka 
+       

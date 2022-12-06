@@ -10,10 +10,6 @@ docker network create k3d
 k3d registry create registry.localhost --port 5500
 docker network connect k3d k3d-registry.localhost
 
-echo "adding k9s"
-curl -fSL -o "/usr/local/bin/k9s" "https://github.com/derailed/k9s/releases/download/v0.26.3/k9s_Linux_x86_64"
-sudo chmod a+x /usr/local/bin/k9s
-
 
 # only run apt upgrade on pre-build
 if [ "$CODESPACE_NAME" = "null" ]
