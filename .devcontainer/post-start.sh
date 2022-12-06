@@ -1,10 +1,7 @@
 
-export AKRI_HELM_CRICTL_CONFIGURATION="--set kubernetesDistro=k3s"
 
 echo "post-start start"
-echo "$(date +'%Y-%m-%d %H:%M:%S')    post-start start" >> "$HOME/status"
 
-az connectedk8s connect --name AzureArcTest1 --resource-group AzureArcTest
 
 echo "E4K install start"
 helm install e4k oci://e4kpreview.azurecr.io/helm/az-e4k --version 0.1.0-amd64 --set e4kdmqtt.broker.backend.chainCount=1

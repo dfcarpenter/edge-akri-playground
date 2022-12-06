@@ -1,20 +1,27 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.2/containers/debian
 {
 	"name": "edge-akri-playground",
-
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick an Debian version: bullseye, buster
+		// Use bullseye on local arm64/Apple Silicon.
+		"args": { "VARIANT": "bullseye" }
 	},
-	
 
-	// do not change these if you want Docker in Docker support
-	//"runArgs": ["--init", "--privileged"],
-	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind" ],
-	// "overrideCommand": false,
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
 
-	// some base images require a specific user name
+	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
+
+	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
-
-	// Set container specific settings\
+	"features": {
+	},
 
 	"customizations": {
 		"vscode": {
@@ -33,25 +40,15 @@
 			]
 		}
 	},
-	
 
-	"hostRequirements": {
-		"cpus": 4
-	},
+	// These are needed for docker-in-docker
+	"runArgs": [
+		"--privileged",
+		"--init"
+	],
+	"overrideCommand": false,
 
-	// forward ports for the app
-	
-
-	// add labels
-	"portsAttributes": {
-		"30000": { "label": "Prometheus" },
-		"31080": { "label": "Heartbeat" },
-		"32000": { "label": "Grafana" }
-	},
-
-	// Install extensions
-	
-
+	// Initialize a Kubernetes cluster and expose the ingress controller to the user on port 8081.
 	"waitFor": "postCreateCommand",
 
 	// Use 'onCreateCommand' to run commands as part of container creation.
@@ -62,8 +59,8 @@
 
 	// Use 'postStartCommand' to run commands after the container starts.
 	"postStartCommand": "bash ./.devcontainer/post-start.sh",
-
 	"forwardPorts": [
 		"8081:8081"
 	]
+
 }
