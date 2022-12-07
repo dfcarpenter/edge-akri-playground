@@ -6,7 +6,7 @@ param location string = 'westus3'
 
 
 resource eventhubnamespace 'Microsoft.EventHub/namespaces@2021-11-01' = {
-  name: 'e2k-d2c'
+  name: 'akri-opc-ehnamespace'
   location: location
   sku: {
     name: 'Standard'
@@ -20,7 +20,7 @@ resource eventhubnamespace 'Microsoft.EventHub/namespaces@2021-11-01' = {
 
 
 resource eventhub 'Microsoft.EventHub/namespaces/eventhubs@2021-11-01' = {
-  name: 'akri-opc-eventhub'
+  name: 'e4k-d2c'
   parent: eventhubnamespace
   
   properties: {
@@ -54,56 +54,56 @@ var eventHubNamespaceConnectionString = listKeys(eventHubNamespace_authorization
 
 
 
-resource streamingAnalyticsJob 'Microsoft.StreamAnalytics/streamingjobs@2021-10-01-preview' = {
-  name: 'akri-opc-job'
-  location: location 
-  sku: {
-    capacity: 36
-    name: 'Standard'
-  }
-  properties: {
-    compatibilityLevel: '1.1'
-  }
-} 
+// resource streamingAnalyticsJob 'Microsoft.StreamAnalytics/streamingjobs@2021-10-01-preview' = {
+//   name: 'akri-opc-job'
+//   location: location 
+//   sku: {
+//     capacity: 36
+//     name: 'Standard'
+//   }
+//   properties: {
+//     compatibilityLevel: '1.1'
+//   }
+// } 
 
-resource streamingAnalyticsJobInput 'Microsoft.StreamAnalytics/streamingjobs/inputs@2021-10-01-preview' = {
-  name: 'akriopc-inputjob-eventhub'
-  parent:  streamingAnalyticsJob
-  properties: {
-    type: 'Stream'
-    datasource: {
-      type: 'Microsoft.EventHub/EventHub'
-      properties: {
-        authenticationMode: 'connectionString'
-        consumerGroupName: 'e4kconnector'
-        eventHubName: eventhub.name
-        partitionCount: 1
-        prefetchCount: 1
-        serviceBusNamespace: eventhubnamespace.name
-        sharedAccessPolicyKey: 'string'
-        sharedAccessPolicyName: 'string'
-      }    
-  }
-}
-}
+// resource streamingAnalyticsJobInput 'Microsoft.StreamAnalytics/streamingjobs/inputs@2021-10-01-preview' = {
+//   name: 'akriopc-inputjob-eventhub'
+//   parent:  streamingAnalyticsJob
+//   properties: {
+//     type: 'Stream'
+//     datasource: {
+//       type: 'Microsoft.EventHub/EventHub'
+//       properties: {
+//         authenticationMode: 'connectionString'
+//         consumerGroupName: 'e4kconnector'
+//         eventHubName: eventhub.name
+//         partitionCount: 1
+//         prefetchCount: 1
+//         serviceBusNamespace: eventhubnamespace.name
+//         sharedAccessPolicyKey: 'string'
+//         sharedAccessPolicyName: 'string'
+//       }    
+//   }
+// }
+// }
 
 
-resource streamingAnalyticsJobOutput 'Microsoft.StreamAnalytics/streamingjobs/outputs@2021-10-01-preview' = {
-  name: 'akriopc-outputjob-powerbi'
-  parent:  streamingAnalyticsJob
-  properties: {
-    datasource: {
-      type: 'PowerBI'
-      properties: {
-        authenticationMode: 'string'
-        dataset: 'string'
-        groupId: 'string'
-        groupName: 'string'
-        refreshToken: 'string'
-        table: 'string'
-        tokenUserDisplayName: 'string'
-        tokenUserPrincipalName: 'string'
-      }
-    }
-  }
-}
+// resource streamingAnalyticsJobOutput 'Microsoft.StreamAnalytics/streamingjobs/outputs@2021-10-01-preview' = {
+//   name: 'akriopc-outputjob-powerbi'
+//   parent:  streamingAnalyticsJob
+//   properties: {
+//     datasource: {
+//       type: 'PowerBI'
+//       properties: {
+//         authenticationMode: 'string'
+//         dataset: 'string'
+//         groupId: 'string'
+//         groupName: 'string'
+//         refreshToken: 'string'
+//         table: 'string'
+//         tokenUserDisplayName: 'string'
+//         tokenUserPrincipalName: 'string'
+//       }
+//     }
+//   }
+// }

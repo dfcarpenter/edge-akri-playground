@@ -11,6 +11,9 @@ import threading
 
 from gmqtt import Client as MQTTClient 
 
+
+opc_discovery_url = os.environ('OPCUA_DISCOVERY_URL')
+
 fetch_interval = 1 # seconds
 
 logging.basicConfig(level=logging.INFO)
