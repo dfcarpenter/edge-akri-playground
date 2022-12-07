@@ -42,19 +42,19 @@ sequenceDiagram
     participant Akri Agent 
     participant kubelet
     participant Akri Secrets
-    participant Akri OPC-UA Broker
-    participant OPC-UA Server
+    participant Akri OPC UA Broker
+    participant OPC UA Server
     participant Azure ARM
     Operator->>Config CRD: Apply Configuration
     loop Detect New Configuration
         Config CRD->>Akri Agent: Detect New Configuration
     end
     loop Asset Onboarding
-        Akri Agent->>OPC-UA Server: Discovery
+        Akri Agent->>OPC UA Server: Discovery
     end
     Akri Agent->>Instance CRD: Create Instance
     Instance CRD-->>Akri Controller: Detect Instance Change
-    Akri Controller->>Akri OPC-UA Broker:Schedule Broker Pod 
+    Akri Controller->>Akri OPC UA Broker:Schedule Broker Pod 
    
 ```
 ----
@@ -70,15 +70,15 @@ sequenceDiagram
     participant Akri Agent 
     participant kubelet
     participant Akri Secrets
-    participant Akri OPCUA Broker
-    participant OPC-UA Server
+    participant Akri OPC UA Broker
+    participant OPC UA Server
     participant Azure ARM
     loop Asset Onboarding
-        Akri Agent->>OPC-UA Server: Discovery
+        Akri Agent->>OPC UA Server: Discovery
     end
     Akri Agent->>Instance CRD: Create Instance
     Instance CRD-->>Akri Controller: Detect Instance Change
-    Akri Controller->>Akri OPCUA Broker:Schedule Broker Pod 
+    Akri Controller->>Akri OPC UA Broker:Schedule Broker Pod 
    
 ```
 ----
@@ -94,19 +94,19 @@ sequenceDiagram
     participant Akri Agent 
     participant kubelet
     participant Akri Secrets
-    participant Akri OPC-UA Broker
-    participant OPC-UA Server
+    participant Akri OPC UA Broker
+    participant OPC UA Server
     participant Azure ARM
     Operator->>Config CRD: Apply Configuration
     loop Detect New Configuration
         Config CRD->>Akri Agent: Detect New Configuration
     end
     loop Asset Onboarding
-        Akri Agent->>OPC-UA Server: Discovery
+        Akri Agent->>OPC UA Server: Discovery
     end
     Akri Agent->>Instance CRD: Create Instance
     Instance CRD-->>Akri Controller: Detect Instance Change
-    Akri Controller->>Akri OPC-UA Broker:Schedule Broker Pod 
+    Akri Controller->>Akri OPC UA Broker:Schedule Broker Pod 
    
 ```
 ----
