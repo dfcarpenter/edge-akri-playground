@@ -70,7 +70,7 @@ sequenceDiagram
     participant Akri Agent 
     participant kubelet
     participant Akri Secrets
-    participant Akri OPC-UA Broker
+    participant Akri OPCUA Broker
     participant OPC-UA Server
     participant Azure ARM
     loop Asset Onboarding
@@ -78,7 +78,7 @@ sequenceDiagram
     end
     Akri Agent->>Instance CRD: Create Instance
     Instance CRD-->>Akri Controller: Detect Instance Change
-    Akri Controller->>Akri OPC-UA Broker:Schedule Broker Pod 
+    Akri Controller->>Akri OPCUA Broker:Schedule Broker Pod 
    
 ```
 ----
