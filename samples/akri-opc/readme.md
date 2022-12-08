@@ -83,7 +83,7 @@ sequenceDiagram
 ```
 ----
 
-## Assign Permissions for controlling Assets
+## Assign Permissions for Node
 ```mermaid
 sequenceDiagram
     autonumber
@@ -96,13 +96,13 @@ sequenceDiagram
     participant Akri Secrets
     participant Akri OPC UA Broker
     participant OPC UA Server
-    participant Azure ARM
+    participant Node
     Operator->>Config CRD: Apply Configuration
     loop Detect New Configuration
         Config CRD->>Akri Agent: Detect New Configuration
     end
-    loop Asset Onboarding
-        Akri Agent->>OPC UA Server: Discovery
+    loop Node Feedback Loop
+     OPC UA Server->>Node:    
     end
     Akri Agent->>Instance CRD: Create Instance
     Instance CRD-->>Akri Controller: Detect Instance Change
@@ -111,7 +111,7 @@ sequenceDiagram
 ```
 ----
 
-## Monitoring Assets
+## Monitoring A Subset of Nodes
 
 ```mermaid
 sequenceDiagram
@@ -129,7 +129,27 @@ sequenceDiagram
         Robot->>Factory Gateway: Telemetry Stream
         Operator->>Factory Gateway: Observe Data Stream
     end
-     
-   
+```
+----
+
+
+## Send Commands To Specific Nodes
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Operator
+    participant Monitoring Portal
+    participant Asset Catalog
+    participant Akri Broker
+    participant Robot
+    participant Factory Gateway
+    loop Operation and Health Metrics
+        Robot->>Akri Broker: Collection
+    end
+    loop Non Operational Robot
+        Robot->>Factory Gateway: Telemetry Stream
+        Operator->>Factory Gateway: Observe Data Stream
+    end
 ```
 
